@@ -11,7 +11,22 @@ The application uses advanced text extraction techniques and pattern matching to
 ![Resume Parser Screenshot]
 (Add a screenshot of your application here)
 
-## Installation
+## Installation & Quick Start
+
+### Using Docker (Recommended)
+
+```bash
+# Clone the repository
+git clone https://github.com/yourusername/resume_parser_AI.git
+cd resume_parser_AI
+
+# Build and start the Docker container
+docker-compose up --build
+
+# The application will be available at http://localhost:5000
+```
+
+### Manual Installation
 
 ```bash
 # Clone the repository
@@ -24,11 +39,7 @@ source venv/bin/activate  # On Windows: venv\Scripts\activate
 
 # Install dependencies
 pip install -r requirements.txt
-```
 
-## Quick Start
-
-```python
 # Start the Flask application
 python app.py
 
@@ -80,12 +91,24 @@ resume_parser_AI/
 
 ## Configuration
 
-The application uses the following default configuration:
+### Application Configuration
 - Server: Flask development server on port 5000
 - Database: SQLite (resumes.db)
 - Upload Directory: ./uploads
 - Maximum File Size: 16MB
 - Allowed File Types: PDF
+
+### Docker Configuration
+- The application runs in a containerized environment
+- Port 5000 is exposed and mapped to the host
+- Upload directory is persisted using Docker volumes
+- Environment variables can be configured in docker-compose.yml
+
+### Environment Variables
+```bash
+FLASK_APP=app.py        # Flask application entry point
+FLASK_ENV=production    # Flask environment (production/development)
+```
 
 ## API Reference
 
