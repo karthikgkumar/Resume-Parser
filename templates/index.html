@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Parser</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Resume Parser</h1>
+        <div class="upload-section">
+            <form id="upload-form">
+                <div class="file-input">
+                    <input type="file" id="resume" name="resume" accept=".pdf" required>
+                    <label for="resume">Choose PDF Resume</label>
+                </div>
+                <button type="submit">Upload & Parse</button>
+            </form>
+        </div>
+        
+        <div id="result" class="result-section" style="display: none;">
+            <h2>Extracted Information</h2>
+            <div class="result-content">
+                <div class="basic-info">
+                    <h3>Basic Information</h3>
+                    <p><strong>Name:</strong> <span id="name"></span></p>
+                    <p><strong>Email:</strong> <span id="email"></span></p>
+                    <p><strong>Phone:</strong> <span id="phone"></span></p>
+                </div>
+                
+                <div class="skills-section">
+                    <h3>Skills</h3>
+                    <div id="skills" class="skills-list"></div>
+                </div>
+                
+                <div class="experience-section">
+                    <h3>Work Experience</h3>
+                    <div id="experience"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="navigation">
+            <a href="{{ url_for('view_resumes') }}" class="nav-button">View All Resumes</a>
+            <a href="{{ url_for('search') }}" class="nav-button">Search Resumes</a>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

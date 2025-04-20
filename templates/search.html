@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Resumes</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Search Resumes</h1>
+        
+        <div class="search-section">
+            <form action="{{ url_for('search') }}" method="GET">
+                <div class="search-inputs">
+                    <input type="text" name="q" placeholder="Search by name..." value="{{ request.args.get('q', '') }}">
+                    <input type="text" name="skills" placeholder="Skills (comma-separated)" value="{{ request.args.get('skills', '') }}">
+                    <button type="submit">Search</button>
+                </div>
+            </form>
+        </div>
+        
+        <div class="search-results">
+            {% if results %}
+                {% for resume in results %}
+                <div class="resume-card">
+                    <h2>{{ resume.name }}</h2>
+                    <div class="resume-content">
+                        <p><strong>Email:</strong> {{ resume.email }}</p>
+                        <p><strong>Phone:</strong> {{ resume.phone }}</p>
+                        
+                        <div class="skills-section">
+                            <h3>Skills</h3>
+                            <div class="skills-list">
+                                {% for skill in resume.skills %}
+                                <span class="skill-tag">{{ skill }}</span>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        
+                        <div class="experience-section">
+                            <h3>Work Experience</h3>
+                            {% for exp in resume.work_experience %}
+                            <div class="experience-item">
+                                <h4>{{ exp.company }}</h4>
+                                <p class="dates">{{ exp.dates }}</p>
+                                <p class="description">{{ exp.description }}</p>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            {% else %}
+                <p class="no-results">No results found.</p>
+            {% endif %}
+        </div>
+        
+        <div class="navigation">
+            <a href="{{ url_for('index') }}" class="nav-button">Upload New Resume</a>
+            <a href="{{ url_for('view_resumes') }}" class="nav-button">View All Resumes</a>
+        </div>
+    </div>
+</body>
+</html>
